@@ -61,7 +61,6 @@ const ToDoList = () => {
       </div>
       <button onClick={() => updateCompleted(true)}>Tout terminer</button>
       <button onClick={() => updateCompleted(false)}>Tout annuler</button>
-      <Input />
     </div>
   );
 };

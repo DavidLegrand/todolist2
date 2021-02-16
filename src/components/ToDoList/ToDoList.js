@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-import Task from "../Task";
-import Input from "../Input";
+import React, { useState, useEffect } from "react";
+import NewTaskForm from "../NewTaskForm";
+import Controls from "../Controls";
+import ListView from "../ListView";
+import Title from "../Title";
+
 import css from "./ToDoList.module.css";
 
 const ToDoList = () => {
@@ -33,9 +36,20 @@ const ToDoList = () => {
 
   const [list, setList] = useState(initialList);
 
+
   const removeTask = (id) => {
-    const newList = list.filter((t) => t.id !== id);
-    setList(newList);
+    setList(list.filter((t) => t.id !== id));
+  };
+
+  const getNewId = () => {
+    return (
+      list.reduce((prev, current) => (prev.id > current.id ? prev : current))
+        .id + 1
+    );
+  };
+
+  const addTask = (form) => {
+    setList([...list, { ...form, id: getNewId() }]);
   };
 
   const updateCompleted = (boolean, id = null) => {
@@ -48,19 +62,10 @@ const ToDoList = () => {
 
   return (
     <div className={css.container}>
-      <h1 className={css.title}>To do list</h1>
-      <div>
-        {list.map((t) => (
-          <Task
-            task={t}
-            remove={removeTask}
-            update={updateCompleted}
-            key={t.id}
-          />
-        ))}
-      </div>
-      <button onClick={() => updateCompleted(true)}>Tout terminer</button>
-      <button onClick={() => updateCompleted(false)}>Tout annuler</button>
+      <Title>To Do List</Title>
+      <ListView list={list} update={updateCompleted} remove={removeTask} />
+      <Controls update={updateCompleted} />
+      <NewTaskForm add={addTask} />
     </div>
   );
 };

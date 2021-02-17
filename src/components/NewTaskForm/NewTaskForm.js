@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Title from "../Title";
+import Title from "components/Title";
 import css from './NewTaskForm.module.css'
 const NewTaskForm = ({ add }) => {
   // State

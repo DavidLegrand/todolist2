@@ -1,6 +1,6 @@
 import "./App.css";
-import HomePage from "../HomePage";
-import ContextProvider from "../../context";
+import HomePage from "components/HomePage";
+import ContextProvider from "context";
 
 function App() {
   return (

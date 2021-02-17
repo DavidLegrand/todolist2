@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import Login from "../Login";
-import ToDoList from "../ToDoList";
+import Login from "components/Login";
+import ToDoList from "components/ToDoList";
 
-import User from "../../context/User";
+import User from "context/User";
 
 const HomePage = () => {
   const { user } = useContext(User);

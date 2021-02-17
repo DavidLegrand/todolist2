@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import User from "../../context/User";
+import User from "context/User";
 
 const Logout = () => {
   const { setUser } = useContext(User);

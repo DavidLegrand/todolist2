@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import User from "../../context/User";
-import Title from "../Title";
-import Container from "../Container";
+import User from "context/User";
+import Title from "components/Title";
+import Container from "components/Container";
 
 const Login = () => {
   const { setUser } = useContext(User);

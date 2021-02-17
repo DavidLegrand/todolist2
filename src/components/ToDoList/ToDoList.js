@@ -1,33 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-import NewTaskForm from "../NewTaskForm";
-import Controls from "../Controls";
-import ListView from "../ListView";
-import Title from "../Title";
-import Container from "../Container";
-import Logout from "../Logout";
-import User from "../../context/User";
-import { objToArr } from "../../utils";
+import React, { useContext } from "react";
+import NewTaskForm from "components/NewTaskForm";
+import Controls from "components/Controls";
+import ListView from "components/ListView";
+import Title from "components/Title";
+import Container from "components/Container";
+import Logout from "components/Logout";
+
+import List from "context/List";
 
 const ToDoList = () => {
-  const [list, setList] = useState([]);
-  const { user } = useContext(User);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo=${user.id}`;
-        const res = await fetch(url);
-        if (!res.ok) throw Error(res.statusText);
-        else {
-          const data = await res.json();
-          setList([...objToArr(data)]);
-          console.log("données récupérées");
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    fetchData();
-  }, []);
+  //const [list, setList] = useState([]);
+  const { list, setList } = useContext(List);
 
   const removeTask = (id) => {
     setList(list.filter((t) => t.id !== id));

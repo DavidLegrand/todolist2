@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import NewTaskForm from "../NewTaskForm";
 import Controls from "../Controls";
 import ListView from "../ListView";
 import Title from "../Title";
 import Container from "../Container";
 import Logout from "../Logout";
+import User from "../../context/User";
+import { objToArr } from "../../utils";
 
 const ToDoList = () => {
   const [list, setList] = useState([]);
-
+  const { user } = useContext(User);
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(
-          "https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json"
-        );
+        const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo=${user.id}`;
+        const res = await fetch(url);
         if (!res.ok) throw Error(res.statusText);
         else {
           const data = await res.json();
-          setList([...data]);
+          setList([...objToArr(data)]);
           console.log("données récupérées");
         }
       } catch (e) {

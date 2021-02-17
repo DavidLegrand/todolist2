@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import User from "../../context/User";
+import Title from "../Title";
+import Container from "../Container";
 
 const Login = () => {
-  // Récupérer le context User (null par défaut)
-  // Dans le JSX créer un bouton
-  // Au clic du bouton, modifier le context User avec la valeur suivante
-  // {id:1, name:"David"}
-  return <div>Login</div>;
+  const { setUser } = useContext(User);
+  const loggedUser = { id: 1, name: "David" };
+  return (
+    <Container>
+      <Title>Login</Title>
+      <button onClick={() => setUser(loggedUser)}>Se connecter</button>
+    </Container>
+  );
 };
 
 export default Login;

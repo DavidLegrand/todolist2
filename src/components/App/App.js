@@ -1,19 +1,11 @@
 import "./App.css";
-import ToDoList from "../ToDoList";
-import Login from "../Login";
+import HomePage from "../HomePage";
 import ContextProvider from "../../context";
 
 function App() {
   return (
     <ContextProvider>
-      {
-        // si on a un utilisateur dans le contexte,
-          // on affiche ToDoList,
-        // sinon
-          // On affiche Login
-      }
-      <Login />
-      <ToDoList />
+      <HomePage />
     </ContextProvider>
   );
 }

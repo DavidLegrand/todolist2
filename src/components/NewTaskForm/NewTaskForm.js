@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Title from "../Title";
-
+import css from './NewTaskForm.module.css'
 const NewTaskForm = ({ add }) => {
   // State
   const initialForm = {
@@ -25,7 +25,7 @@ const NewTaskForm = ({ add }) => {
 
   // Vue
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.form}>
       <Title>Nouvelle Tâche</Title>
       <div>
         <input

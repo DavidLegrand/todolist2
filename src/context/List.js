@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import useFetch from "hooks/useFetch";
 
 import User from "context/User";
 import { objToArr } from "utils";
@@ -9,24 +10,17 @@ const List = createContext(defaultList);
 export const ListProvider = ({ children }) => {
   const [list, setList] = useState(defaultList);
   const { user } = useContext(User);
+  const doFetch = useFetch();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo="${user.uid}"`;
-        const res = await fetch(url);
-        if (!res.ok) throw Error(res.statusText);
-        else {
-          const data = await res.json();
-          setList([...objToArr(data)]);
-          console.log("données récupérées");
-        }
-      } catch (e) {
-        console.error(e);
-      }
+    const fetchData = async () => {
+      const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo="${user.uid}"`;
+      setList(objToArr(await doFetch(url)));
+    };
+    if (user) {
+      fetchData();
     }
-    if (user) fetchData();
-  }, [user]);
+  }, [user, doFetch]);
 
   return <List.Provider value={{ list, setList }}>{children}</List.Provider>;
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import Title from "components/Title";
-import Container from "components/Container";
+import Container from "components/shared/Container";
+import TextInput from "components/layout/TextInput";
 import Firebase from "context/Firebase";
 import User from "context/User";
 
@@ -15,7 +15,7 @@ const Register = () => {
     error: null,
   };
   const [form, setform] = useState(initialState);
-  const [isValid, setValid] = useState(false);  
+  const [isValid, setValid] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ const Register = () => {
       .catch((error) => {
         setform({ ...form, error: error });
       });
-  };  
+  };
   const handleChange = (event) => {
     setform({
       ...form,
@@ -44,45 +44,35 @@ const Register = () => {
     );
   }, [form]);
   return (
-    <Container>
-      <Title>S'inscrire</Title>
+    <Container title="S'enregistrer">
       <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            type="text"
-            placeholder="Pseudo"
-          />
-        </div>
-        <div>
-          <input
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            type="email"
-            placeholder="Email"
-          />
-        </div>
-        <div>
-          <input
-            name="passwordOne"
-            value={form.passwordOne}
-            onChange={handleChange}
-            type="password"
-            placeholder="Mot de passe"
-          />
-        </div>
-        <div>
-          <input
-            name="passwordTwo"
-            value={form.passwordTwo}
-            onChange={handleChange}
-            type="password"
-            placeholder="Confirmer MDP"
-          />
-        </div>
+        <TextInput
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          placeholder="Login"
+        />
+        <TextInput
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email"
+          type="email"
+        />
+        <TextInput
+          name="passwordOne"
+          value={form.passwordOne}
+          onChange={handleChange}
+          placeholder="Mot de passe"
+          type="password"
+        />
+        <TextInput
+          name="passwordTwo"
+          value={form.passwordTwo}
+          onChange={handleChange}
+          placeholder="Mot de passe"
+          type="password"
+        />
         <div>
           <button type="submit" disabled={!isValid}>
             S'inscrire

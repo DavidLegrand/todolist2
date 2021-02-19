@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import User from "context/User";
 import Firebase from "context/Firebase";
-import Title from "components/Title";
-import Container from "components/Container";
+import Title from "components/shared/Title";
+import Container from "components/shared/Container";
 
 const Login = () => {
   const { setUser } = useContext(User);
@@ -42,8 +42,7 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Title>Login</Title>
+    <Container title="Se connecter">
       <form onSubmit={handleSubmit}>
         <div>
           <input

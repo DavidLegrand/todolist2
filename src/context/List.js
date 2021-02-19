@@ -13,7 +13,7 @@ export const ListProvider = ({ children }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo=${user.id}`;
+        const url = `https://todo-react-7181e-default-rtdb.firebaseio.com/tasks.json?orderBy="userId"&equalTo="${user.uid}"`;
         const res = await fetch(url);
         if (!res.ok) throw Error(res.statusText);
         else {

@@ -1,13 +1,14 @@
 import { UserProvider } from "context/User";
 import { ListProvider } from "context/List";
+import { FirebaseProvider } from "context/Firebase";
 
 const ContextProvider = ({ children }) => {
   return (
-    <UserProvider>
-      <ListProvider>
-        {children}
-        </ListProvider>
-    </UserProvider>
+    <FirebaseProvider>
+      <UserProvider>
+        <ListProvider>{children}</ListProvider>
+      </UserProvider>
+    </FirebaseProvider>
   );
 };
 
